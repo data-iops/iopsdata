@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { KeyboardShortcutHint } from "@/components/feedback/KeyboardShortcutHint";
 
 export function PreferencesSettings() {
   const [theme, setTheme] = useState("system");
@@ -65,17 +66,20 @@ export function PreferencesSettings() {
 
         <div className="rounded-lg border border-border/60 bg-background/40 p-4">
           <p className="text-sm font-medium">Keyboard shortcuts</p>
-          <ul className="mt-3 space-y-2 text-xs text-muted-foreground">
-            <li>
-              <span className="font-medium text-foreground">⌘/Ctrl + K</span> — open global search
-            </li>
-            <li>
-              <span className="font-medium text-foreground">⌘/Ctrl + Enter</span> — run selected query
-            </li>
-            <li>
-              <span className="font-medium text-foreground">⌘/Ctrl + /</span> — toggle SQL editor hints
-            </li>
-          </ul>
+          <div className="mt-3 space-y-2">
+            <KeyboardShortcutHint
+              keys={["⌘", "Ctrl", "K"]}
+              description="Open global search"
+            />
+            <KeyboardShortcutHint
+              keys={["⌘", "Ctrl", "Enter"]}
+              description="Run selected query"
+            />
+            <KeyboardShortcutHint
+              keys={["⌘", "Ctrl", "/"]}
+              description="Toggle SQL editor hints"
+            />
+          </div>
         </div>
       </CardContent>
     </Card>

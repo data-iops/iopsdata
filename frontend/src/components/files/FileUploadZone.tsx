@@ -42,6 +42,9 @@ export function FileUploadZone({ onUpload }: FileUploadZoneProps) {
           "flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border/60 bg-card/60 px-6 py-10 text-center transition-colors",
           isDragging && "border-accent bg-accent/10",
         )}
+        role="button"
+        tabIndex={0}
+        aria-label="Upload files"
         onDragOver={(event) => {
           event.preventDefault();
           setIsDragging(true);
@@ -52,6 +55,12 @@ export function FileUploadZone({ onUpload }: FileUploadZoneProps) {
           setIsDragging(false);
           handleFiles(event.dataTransfer.files);
         }}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
       >
         <CloudUpload className="h-8 w-8 text-accent" />
         <div>
@@ -60,10 +69,7 @@ export function FileUploadZone({ onUpload }: FileUploadZoneProps) {
             or click to browse. Supported formats: {supportedFormats.join(", ")}
           </p>
         </div>
-        <Button
-          variant="outline"
-          onClick={() => inputRef.current?.click()}
-        >
+        <Button variant="outline" onClick={() => inputRef.current?.click()}>
           Browse files
         </Button>
         <input

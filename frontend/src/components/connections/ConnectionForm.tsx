@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { TestConnection } from "@/components/connections/TestConnection";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 export type ConnectionFormValues = {
   name: string;
@@ -285,7 +286,14 @@ export function ConnectionForm({ initialValues, onSave }: ConnectionFormProps) {
         <TestConnection status={testState} message={testMessage} />
         <div className="flex flex-wrap items-center gap-3">
           <Button variant="outline" onClick={handleTest} disabled={testState === "running"}>
-            Test connection
+            {testState === "running" ? (
+              <>
+                <LoadingSpinner size="sm" label="Testing connection" />
+                Testing...
+              </>
+            ) : (
+              "Test connection"
+            )}
           </Button>
           <Button onClick={handleSubmit} disabled={!isValid}>
             Save connection

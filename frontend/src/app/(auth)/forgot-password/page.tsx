@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { AuthForm } from "@/components/auth/AuthForm";
 import { Input } from "@/components/ui/input";
 import { useSupabase } from "@/app/providers";
-import { useToast } from "@/components/ui/use-toast";
+import { useFeedbackToast } from "@/components/feedback/ToastNotifications";
 
 
 type ForgotPasswordValues = {
@@ -16,7 +16,7 @@ type ForgotPasswordValues = {
 
 export default function ForgotPasswordPage() {
   const { supabase } = useSupabase();
-  const { toast } = useToast();
+  const { notifyError, notifySuccess } = useFeedbackToast();
   const [formError, setFormError] = useState<string | null>(null);
   const {
     register,
@@ -36,15 +36,11 @@ export default function ForgotPasswordPage() {
 
     if (error) {
       setFormError(error.message);
-      toast({
-        title: "Reset failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      notifyError(error, { title: "Reset failed" });
       return;
     }
 
-    toast({
+    notifySuccess({
       title: "Check your email",
       description: "We sent a password reset link to your inbox.",
     });

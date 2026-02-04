@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
 import { useSupabase } from "@/app/providers";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 type AuthGuardProps = {
   children: ReactNode;
@@ -38,7 +39,11 @@ export function AuthGuard({ children, redirectTo = "/login" }: AuthGuardProps) {
   }, [checking, redirectTo, router, session]);
 
   if (checking || !session) {
-    return null;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <LoadingSpinner label="Checking session" />
+      </div>
+    );
   }
 
   return <>{children}</>;
