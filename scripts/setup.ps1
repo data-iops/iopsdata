@@ -127,7 +127,7 @@ Write-Host ""
 Write-Host "Backend:" -ForegroundColor Yellow
 Write-Host "  cd backend"
 Write-Host "  .venv\Scripts\Activate.ps1"
-Write-Host "  uvicorn src.iopsdata.main:app --reload --port 8000"
+Write-Host "  uvicorn src.iopsdata.api.main:app --reload --port 8000"
 Write-Host ""
 Write-Host "Frontend:" -ForegroundColor Yellow
 Write-Host "  cd frontend"

@@ -1,94 +1,88 @@
+<p align="center">
+  <img src="https://placehold.co/1200x300?text=iOpsData" alt="iOpsData banner" />
+</p>
+
 # iOpsData
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)](https://nextjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-green.svg)](https://fastapi.tiangolo.com/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Build](https://github.com/data-iops/iopsdata/actions/workflows/ci.yml/badge.svg)](https://github.com/data-iops/iopsdata/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/github/v/release/data-iops/iopsdata?include_prereleases)](https://github.com/data-iops/iopsdata/releases)
+[![Discord](https://img.shields.io/badge/Discord-Community-5865F2?logo=discord&logoColor=white)](https://discord.gg/your-invite)
 
-**AI-native data workspace** - Query, analyze, and visualize your data with natural language.
+**iOpsData is the Cursor for Data Professionals** — an AI-native operating system where analysts and engineers can explore, model, and ship data work end-to-end without tool fragmentation.
 
-## Features
+## Key Features
 
-- Natural language to SQL query generation
-- Multi-database connectivity (PostgreSQL, DuckDB, and more)
-- Interactive data exploration and visualization
-- AI-powered data insights and analysis
+- 🧠 **Conversational data workbench** (NL → SQL, multi-turn chat)
+- 🧭 **Lineage & impact analysis** for tables and columns
+- 📊 **Dynamic canvas** for charts, tables, and notebooks
+- 🧬 **Semantic layer ready** (metrics as first-class objects)
+- 🔒 **Open & auditable** with secure encryption for connections
 
-## Quick Start
+## Quick Demo
 
-### Prerequisites
+![iOpsData demo](https://placehold.co/1200x600?text=iOpsData+Demo)
 
-- Python 3.11+
-- Node.js 18+
-- npm or yarn
+## Quick Start (5 Steps)
 
-### Installation
+1. **Clone**
+   ```bash
+   git clone https://github.com/data-iops/iopsdata.git
+   cd iopsdata
+   ```
+2. **Run setup**
+   ```bash
+   ./scripts/setup.sh
+   ```
+3. **Configure env**
+   ```bash
+   cp .env.example .env
+   ```
+4. **Start backend**
+   ```bash
+   cd backend
+   source .venv/bin/activate
+   uvicorn src.iopsdata.api.main:app --reload --port 8000
+   ```
+5. **Start frontend**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
-1. Clone the repository:
-```bash
-git clone https://github.com/data-iops/iopsdata.git
-cd iopsdata
-```
+Open the app at `http://localhost:3000`.
 
-2. Run the setup script:
+## Documentation
 
-**Linux/macOS:**
-```bash
-chmod +x scripts/setup.sh
-./scripts/setup.sh
-```
+- 📘 [Docs Home](./docs/README.md)
+- 🛠️ [Installation](./docs/INSTALLATION.md)
+- ⚙️ [Configuration](./docs/CONFIGURATION.md)
+- 🚀 [Deployment](./docs/DEPLOYMENT.md)
+- 🧱 [Architecture](./docs/ARCHITECTURE.md)
+- 📡 [API](./docs/API.md)
+- 🤝 [Contributing](./docs/CONTRIBUTING.md)
 
-**Windows (PowerShell):**
-```powershell
-.\scripts\setup.ps1
-```
+## Tech Stack
 
-3. Configure environment variables:
-```bash
-cp .env.example .env
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env.local
-```
+![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-009688?logo=fastapi&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-2.x-3ecf8e?logo=supabase&logoColor=white)
 
-4. Start the development servers:
+## Contributing
 
-**Backend:**
-```bash
-cd backend
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-uvicorn src.iopsdata.main:app --reload --port 8000
-```
+We welcome community contributions! Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guide.
 
-**Frontend:**
-```bash
-cd frontend
-npm run dev
-```
+## Community
 
-5. Open your browser:
-   - Frontend: http://localhost:3000
-   - API Docs: http://localhost:8000/docs
-
-## Project Structure
-
-```
-iopsdata/
-├── backend/           # Python FastAPI backend
-│   ├── src/
-│   │   └── iopsdata/  # Main application package
-│   └── pyproject.toml
-├── frontend/          # Next.js 14 frontend
-│   └── src/
-├── docs/              # Documentation
-├── scripts/           # Setup and utility scripts
-├── .env.example       # Environment variables template
-└── README.md
-```
-
-## Development
-
-See the [docs](./docs/README.md) for detailed development guidelines.
+- Discord: https://discord.gg/your-invite
+- Issues: https://github.com/data-iops/iopsdata/issues
 
 ## License
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+Apache 2.0. See [LICENSE](LICENSE).
+
+## Acknowledgments
+
+Inspired by Cursor and the open-source data community.

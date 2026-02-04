@@ -1,29 +1,87 @@
 # iOpsData Documentation
 
-This directory contains documentation for the iOpsData project.
+Welcome to the comprehensive documentation for **iOpsData**, an AI-native operating system for data work. This documentation is designed for contributors, self-hosters, and community members who want to understand, deploy, and extend the project.
 
-## Structure
+## Project Overview
+
+iOpsData is building the **Cursor for Data Professionals**—a single workspace where data analysts, analytics engineers, data scientists, and ML engineers can explore, build, and ship data work end-to-end without tool fragmentation.
+
+**Mission:** Collapse the modern data stack into one intelligent, open, and extensible workspace.
+
+### Core Principles
+- **AI-first, not AI-added**
+- **Open by default**
+- **Context > code**
+- **Human-in-the-loop always**
+- **Composable, not monolithic**
+
+## Architecture Diagram (ASCII)
 
 ```
-docs/
-├── README.md           # This file
-├── architecture/       # System architecture documentation
-├── api/               # API documentation
-├── guides/            # User and developer guides
-└── deployment/        # Deployment guides
++---------------------------+          +-------------------------------+
+|        Frontend UI        |  HTTPS   |          Backend API           |
+|  Next.js / React / Tailwind| <------> |  FastAPI / Python / LLM Router |
++-------------+-------------+          +---------+---------------------+
+              |                                 |
+              |                                 |
+              v                                 v
++---------------------------+          +-------------------------------+
+|    Supabase / Postgres    |          |  External Data Warehouses     |
+|  Auth, storage, metadata  |          |  Snowflake, BigQuery, etc.    |
++---------------------------+          +-------------------------------+
+              |
+              v
++---------------------------+
+|    LLM Providers (OpenAI, |
+|    Anthropic, Groq, etc.) |
++---------------------------+
 ```
 
-## Quick Links
+## Technology Stack
 
-- [Main README](../README.md) - Project overview and quick start
-- [Backend README](../backend/README.md) - Backend development guide
-- [Frontend README](../frontend/README.md) - Frontend development guide
+**Frontend**
+- Next.js 16
+- React 19
+- Tailwind CSS
+- Zustand for state management
+- Supabase client libraries
 
-## Contributing to Documentation
+**Backend**
+- FastAPI
+- Pydantic + pydantic-settings
+- Supabase (auth + storage)
+- DuckDB for local file profiling
+- Async database connectors
 
-When adding new documentation:
+**AI / LLM Layer**
+- Provider router with pluggable LLMs
+- Prompt orchestration for SQL generation
+- Token accounting + structured responses
 
-1. Place files in the appropriate subdirectory
-2. Use clear, descriptive file names
-3. Include a table of contents for longer documents
-4. Update this README if adding new sections
+## Repository Structure
+
+```
+/iopsdata
+├── backend/              # FastAPI service
+│   ├── src/iopsdata/      # Core backend package
+│   └── tests/             # Backend tests
+├── frontend/             # Next.js UI
+│   ├── src/               # Components, pages, state
+│   └── public/            # Static assets
+├── docs/                 # Comprehensive documentation
+├── scripts/              # Local helper scripts
+├── .github/              # CI, issue templates, etc.
+└── .env.example           # Root-level environment sample
+```
+
+## Where to Go Next
+- **Installation:** [`INSTALLATION.md`](./INSTALLATION.md)
+- **Configuration:** [`CONFIGURATION.md`](./CONFIGURATION.md)
+- **Deployment:** [`DEPLOYMENT.md`](./DEPLOYMENT.md)
+- **Architecture:** [`ARCHITECTURE.md`](./ARCHITECTURE.md)
+- **API Reference:** [`API.md`](./API.md)
+- **Contributing:** [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+- **Roadmap:** [`ROADMAP.md`](./ROADMAP.md)
+- **FAQ:** [`FAQ.md`](./FAQ.md)
+
+If you’re new, start with **INSTALLATION** and then explore **ARCHITECTURE** for a deeper understanding.
