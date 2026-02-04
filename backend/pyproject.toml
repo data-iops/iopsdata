@@ -28,6 +28,9 @@ dependencies = [
     "duckdb>=0.10.0",
     "httpx>=0.26.0",
     "python-dotenv>=1.0.0",
+    "supabase>=2.0.0",
+    "sqlglot>=25.0.0",
+    "cryptography>=42.0.0",
     "sqlalchemy>=2.0.0",
 ]
 

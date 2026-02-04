@@ -29,6 +29,10 @@ jobs:
   frontend-build:
     name: Frontend Build
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_API_URL: "http://localhost:8000"
+      NEXT_PUBLIC_SUPABASE_URL: "https://example.supabase.co"
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: "test-key"
     defaults:
       run:
         working-directory: frontend
@@ -38,16 +42,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: "pnpm"
-          cache-dependency-path: frontend/pnpm-lock.yaml
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
       - name: Build frontend
-        run: pnpm build
+        run: npm run build
 
   lint:
     name: Lint
@@ -68,15 +68,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: "pnpm"
-          cache-dependency-path: frontend/pnpm-lock.yaml
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
       - name: Install frontend deps
         working-directory: frontend
-        run: pnpm install
+        run: npm install
       - name: ESLint
         working-directory: frontend
-        run: pnpm lint
+        run: npm run lint
