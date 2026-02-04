@@ -1,9 +1,9 @@
-\"use client\";
+"use client";
 
-import { useCallback, useEffect, useState } from \"react\";
-import { useSearchParams } from \"next/navigation\";
+import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-import { Button } from \"@/components/ui/button\";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
