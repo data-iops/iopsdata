@@ -9,7 +9,7 @@ import { AuthForm } from "@/components/auth/AuthForm";
 import { OAuthButtons } from "@/components/auth/OAuthButtons";
 import { Input } from "@/components/ui/input";
 import { useSupabase } from "@/app/providers";
-import { useToast } from "@/components/ui/use-toast";
+import { useFeedbackToast } from "@/components/feedback/ToastNotifications";
 
 
 type SignupFormValues = {
@@ -20,7 +20,7 @@ type SignupFormValues = {
 
 export default function SignupPage() {
   const { supabase } = useSupabase();
-  const { toast } = useToast();
+  const { notifyError, notifySuccess } = useFeedbackToast();
   const router = useRouter();
   const [formError, setFormError] = useState<string | null>(null);
   const {
@@ -47,15 +47,11 @@ export default function SignupPage() {
 
     if (error) {
       setFormError(error.message);
-      toast({
-        title: "Sign up failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      notifyError(error, { title: "Sign up failed" });
       return;
     }
 
-    toast({
+    notifySuccess({
       title: "Account created",
       description: "Check your email to confirm your account.",
     });

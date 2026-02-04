@@ -5,11 +5,12 @@ import { Github } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useSupabase } from "@/app/providers";
-import { useToast } from "@/components/ui/use-toast";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import { useFeedbackToast } from "@/components/feedback/ToastNotifications";
 
 export function OAuthButtons() {
   const { supabase } = useSupabase();
-  const { toast } = useToast();
+  const { notifyError } = useFeedbackToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGitHub = async () => {
@@ -23,11 +24,7 @@ export function OAuthButtons() {
     });
 
     if (error) {
-      toast({
-        title: "GitHub sign-in failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      notifyError(error, { title: "GitHub sign-in failed" });
       setIsLoading(false);
     }
   };
@@ -47,9 +44,17 @@ export function OAuthButtons() {
         className="w-full gap-2"
         onClick={handleGitHub}
         disabled={isLoading}
+        aria-label="Continue with GitHub"
       >
         <Github className="h-4 w-4" />
-        {isLoading ? "Connecting..." : "GitHub"}
+        {isLoading ? (
+          <>
+            <LoadingSpinner size="sm" label="Connecting" />
+            Connecting...
+          </>
+        ) : (
+          "GitHub"
+        )}
       </Button>
     </div>
   );

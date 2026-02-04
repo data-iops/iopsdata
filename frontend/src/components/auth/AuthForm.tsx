@@ -11,6 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ErrorMessage } from "@/components/ui/ErrorMessage";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { cn } from "@/lib/utils";
 
 type AuthFormProps = {
@@ -47,13 +49,16 @@ export function AuthForm({
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-6">
           {children}
-          {errorMessage ? (
-            <p className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">
-              {errorMessage}
-            </p>
-          ) : null}
+          {errorMessage ? <ErrorMessage error={errorMessage} /> : null}
           <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Working..." : submitLabel}
+            {isSubmitting ? (
+              <>
+                <LoadingSpinner size="sm" label="Submitting" />
+                Working...
+              </>
+            ) : (
+              submitLabel
+            )}
           </Button>
         </form>
       </CardContent>

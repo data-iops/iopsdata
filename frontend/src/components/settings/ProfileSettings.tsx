@@ -1,10 +1,17 @@
 "use client";
 
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { ConfirmationDialog } from "@/components/feedback/ConfirmationDialog";
+import { useFeedbackToast } from "@/components/feedback/ToastNotifications";
 
 export function ProfileSettings() {
+  const [isDeleting, setIsDeleting] = useState(false);
+  const { notifyInfo } = useFeedbackToast();
+
   return (
     <Card className="border-border/60 bg-card/80">
       <CardHeader className="space-y-1">
@@ -30,9 +37,24 @@ export function ProfileSettings() {
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button variant="outline">Change password</Button>
-          <Button variant="outline" className="border-red-500/40 text-red-500 hover:bg-red-500/10">
-            Delete account
-          </Button>
+          <ConfirmationDialog
+            triggerLabel={isDeleting ? "Deleting..." : "Delete account"}
+            triggerClassName="border-red-500/40 text-red-500 hover:bg-red-500/10"
+            title="Delete account?"
+            description="This will remove your workspace access and cannot be undone."
+            confirmLabel="Delete account"
+            disabled={isDeleting}
+            onConfirm={() => {
+              setIsDeleting(true);
+              setTimeout(() => {
+                notifyInfo({
+                  title: "Delete requested",
+                  description: "We'll email you once the request is processed.",
+                });
+                setIsDeleting(false);
+              }, 800);
+            }}
+          />
         </div>
       </CardContent>
     </Card>

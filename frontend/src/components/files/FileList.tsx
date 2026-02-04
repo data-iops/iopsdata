@@ -44,7 +44,12 @@ export function FileList({ files, onSelect }: FileListProps) {
             <span className="text-xs text-muted-foreground">
               {formatDate(file.uploadedAt)}
             </span>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8"
+              aria-label={`Open actions for ${file.name}`}
+            >
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </button>

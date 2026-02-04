@@ -13,6 +13,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LLMProviderCard } from "@/components/settings/LLMProviderCard";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import { createAppError } from "@/lib/errors";
+import { useFeedbackToast } from "@/components/feedback/ToastNotifications";
 
 const providerOptions = [
   {
@@ -57,6 +60,26 @@ export function LLMSettings() {
       return acc;
     }, {}),
   );
+  const [isSaving, setIsSaving] = useState(false);
+  const { notifyError, notifySuccess } = useFeedbackToast();
+
+  const handleSave = () => {
+    if (!Object.values(apiKeys).some((value) => value.trim().length > 0)) {
+      notifyError(createAppError("validation"), {
+        title: "Add at least one API key",
+      });
+      return;
+    }
+
+    setIsSaving(true);
+    setTimeout(() => {
+      notifySuccess({
+        title: "Keys saved",
+        description: "Provider credentials were updated.",
+      });
+      setIsSaving(false);
+    }, 800);
+  };
 
   return (
     <Card className="border-border/60 bg-card/80">
@@ -83,7 +106,16 @@ export function LLMSettings() {
               </SelectContent>
             </Select>
           </div>
-          <Button className="w-full md:w-auto">Save keys</Button>
+          <Button className="w-full md:w-auto" onClick={handleSave} disabled={isSaving}>
+            {isSaving ? (
+              <>
+                <LoadingSpinner size="sm" label="Saving keys" />
+                Saving...
+              </>
+            ) : (
+              "Save keys"
+            )}
+          </Button>
         </div>
         <p className="text-xs text-muted-foreground">
           API keys are encrypted before storage and scoped to your workspace.

@@ -74,6 +74,7 @@ export function ConnectionCard({
             size="sm"
             className="gap-2"
             onClick={() => onEdit(connection)}
+            aria-label={`Edit ${connection.name}`}
           >
             <Edit className="h-3.5 w-3.5" />
             Edit
@@ -83,6 +84,7 @@ export function ConnectionCard({
             size="sm"
             className="gap-2 text-red-300 hover:text-red-200"
             onClick={() => onDelete(connection)}
+            aria-label={`Delete ${connection.name}`}
           >
             <Trash2 className="h-3.5 w-3.5" />
             Delete

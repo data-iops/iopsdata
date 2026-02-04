@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 
 import Providers from "@/app/providers";
-import { Toaster } from "@/components/ui/toaster";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import { ToastNotifications } from "@/components/feedback/ToastNotifications";
 import "../styles/globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -32,8 +33,8 @@ export default function RootLayout({
         className={`${plusJakarta.variable} ${jetBrainsMono.variable} min-h-screen bg-background text-foreground`}
       >
         <Providers>
-          {children}
-          <Toaster />
+          <ErrorBoundary>{children}</ErrorBoundary>
+          <ToastNotifications />
         </Providers>
       </body>
     </html>
