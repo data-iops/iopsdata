@@ -20,22 +20,22 @@ import { WorkspaceSelector } from "@/components/dashboard/WorkspaceSelector";
 const navigation = [
   {
     name: "Workspace",
-    href: "/dashboard",
+    href: "/",
     icon: Workflow,
   },
   {
     name: "Connections",
-    href: "/dashboard/connections",
+    href: "/connections",
     icon: Database,
   },
   {
     name: "Files",
-    href: "/dashboard/files",
+    href: "/files",
     icon: FileText,
   },
   {
     name: "Settings",
-    href: "/dashboard/settings",
+    href: "/settings",
     icon: Settings,
   },
 ];

@@ -18,11 +18,23 @@ const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
   images: {
-    domains: [
-      "images.unsplash.com",
-      "avatars.githubusercontent.com",
-      "cdn.jsdelivr.net",
-      "lh3.googleusercontent.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.jsdelivr.net",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };

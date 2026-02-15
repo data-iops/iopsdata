@@ -41,7 +41,7 @@ export default function SignupPage() {
       email: values.email,
       password: values.password,
       options: {
-        emailRedirectTo: `${window.location.origin}/dashboard`,
+        emailRedirectTo: `${window.location.origin}/connections`,
       },
     });
 
@@ -55,7 +55,7 @@ export default function SignupPage() {
       title: "Account created",
       description: "Check your email to confirm your account.",
     });
-    router.push("/dashboard");
+    router.push("/connections");
   };
 
   return (

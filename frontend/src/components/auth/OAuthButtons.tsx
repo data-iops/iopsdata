@@ -15,7 +15,7 @@ export function OAuthButtons() {
 
   const handleGitHub = async () => {
     setIsLoading(true);
-    const redirectTo = `${window.location.origin}/dashboard`;
+    const redirectTo = `${window.location.origin}/connections`;
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {

@@ -8,6 +8,7 @@ import { MessageList } from "@/components/chat/MessageList";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
+import { apiFetch } from "@/lib/api";
 
 import type { ChatMessageData } from "@/components/chat/ChatMessage";
 
@@ -46,7 +47,7 @@ export function ChatWindow({ className }: ChatWindowProps) {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

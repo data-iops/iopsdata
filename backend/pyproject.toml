@@ -32,6 +32,7 @@ dependencies = [
     "sqlglot>=25.0.0",
     "cryptography>=42.0.0",
     "sqlalchemy>=2.0.0",
+    "aiosqlite>=0.19.0",
 ]
 
 [project.optional-dependencies]
@@ -42,6 +43,12 @@ dev = [
     "ruff>=0.1.0",
     "mypy>=1.8.0",
     "pre-commit>=3.6.0",
+]
+mysql = [
+    "aiomysql>=0.2.0",
+]
+all = [
+    "aiomysql>=0.2.0",
 ]
 
 [build-system]

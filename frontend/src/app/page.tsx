@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -7,7 +8,7 @@ import { ErrorMessage } from "@/components/ui/ErrorMessage";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { createAppError, type AppError } from "@/lib/errors";
 
-export default function Home() {
+function HomeContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<AppError | null>(null);
   const searchParams = useSearchParams();
@@ -62,10 +63,16 @@ export default function Home() {
             </p>
             <div className="flex gap-4">
               <a
-                href="/docs"
+                href="/signup"
                 className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
               >
                 Get Started
+              </a>
+              <a
+                href="/login"
+                className="rounded-lg border border-zinc-300 px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+              >
+                Login
               </a>
               <a
                 href="https://github.com/data-iops/iopsdata"
@@ -80,5 +87,13 @@ export default function Home() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center"><LoadingSkeleton className="h-10 w-40" /></div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

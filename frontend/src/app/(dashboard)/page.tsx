@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -50,7 +51,7 @@ const conversations = [
   },
 ];
 
-export default function DashboardPage() {
+function DashboardContent() {
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<AppError | null>(null);
@@ -194,5 +195,13 @@ export default function DashboardPage() {
         </Card>
       </section>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="space-y-8"><LoadingSkeleton className="h-8 w-64" /><LoadingSkeleton className="h-32 w-full" /></div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }

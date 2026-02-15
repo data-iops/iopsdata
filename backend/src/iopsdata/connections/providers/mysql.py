@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from typing import Any
 
-import aiomysql
+try:
+    import aiomysql
+except ImportError:
+    aiomysql = None
 
 from iopsdata.connections.base import DatabaseConnection, QueryResult
 from iopsdata.connections.schema_extractor import extract_mysql_schema
@@ -25,6 +28,8 @@ class MySQLConnection(DatabaseConnection):
         query_timeout_s: int = 30,
         max_rows: int = 500,
     ) -> None:
+        if aiomysql is None:
+            raise ImportError("aiomysql is required for MySQL connections. Install with: pip install aiomysql")
         super().__init__(name, read_only, query_timeout_s, max_rows)
         self._pool: aiomysql.Pool | None = None
         self._config = {
@@ -82,6 +87,8 @@ class MySQLConnection(DatabaseConnection):
     async def get_schema(self) -> list[dict[str, Any]]:
         if not self._pool:
             raise RuntimeError("Connection pool not initialized")
+        if aiomysql is None:
+            raise ImportError("aiomysql is required for MySQL connections")
         try:
             async with self._pool.acquire() as conn:
                 async with conn.cursor(aiomysql.DictCursor) as cursor:

@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from typing import Any
 
-import aiosqlite
+try:
+    import aiosqlite
+except ImportError:
+    aiosqlite = None
 
 from iopsdata.connections.base import DatabaseConnection, QueryResult
 from iopsdata.connections.schema_extractor import extract_sqlite_schema
@@ -21,6 +24,8 @@ class SQLiteConnection(DatabaseConnection):
         query_timeout_s: int = 30,
         max_rows: int = 500,
     ) -> None:
+        if aiosqlite is None:
+            raise ImportError("aiosqlite is required for SQLite connections. Install with: pip install aiosqlite")
         super().__init__(name, read_only, query_timeout_s, max_rows)
         self._path = path
         self._conn: aiosqlite.Connection | None = None

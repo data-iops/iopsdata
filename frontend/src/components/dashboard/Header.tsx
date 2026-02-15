@@ -29,7 +29,7 @@ export function Header({ onOpenSidebar }: HeaderProps) {
   const pathname = usePathname();
   const [currentProvider, setCurrentProvider] = useState(providerOptions[0].value);
   const segments = pathname.split("/").filter(Boolean).slice(1);
-  const breadcrumbs = ["Dashboard", ...segments.map((segment) => segment.replace(/-/g, " "))];
+  const breadcrumbs = ["Workspace", ...segments.map((segment) => segment.replace(/-/g, " "))];
 
   return (
     <header className="sticky top-0 z-30 flex w-full items-center justify-between gap-4 border-b border-border bg-background/80 px-4 py-4 backdrop-blur sm:px-6 lg:px-10">

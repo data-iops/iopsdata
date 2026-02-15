@@ -143,7 +143,7 @@ export default function FilesPage() {
       title: "Conversation created",
       description: `${file.name} is ready for querying.`,
     });
-    router.push(`/dashboard?file=${file.id}`);
+    router.push(`/?file=${file.id}`);
   };
 
   return (

@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   componentDidCatch(error: Error) {
-    logError(error, "ErrorBoundary");
+    logError(error);
   }
 
   componentDidUpdate(prevProps: ErrorBoundaryProps) {
